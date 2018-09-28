@@ -1,53 +1,39 @@
 module.exports = function getZerosCount(number, base) {
-  
-  
-
-    var zerosCount = 0;
-
-    var num = base;
-
-    var mainNum = 0;
-
-
-
-
-for (var i = 0; i < num ; i++) {
+ 
     
-    if (num == 10) {
-        mainNum = 5;
-    }
+    let n = number;
     
-    else if (i > 0 && num % i == 0) {
+    let zeros = 0;
     
-    var a = Math.floor(num / i),
-        b = Math.floor(num / 7);
+    let b = getSimpleComposition(base);
     
-    
-    if (a * i == num && i > b) {
-        mainNum = i;
-       break;
-      
-    }
-    }
-    
-}
-
-
-if (mainNum > 5) {
-    mainNum = mainNum;
-} else {mainNum = 5;}
-
-
-
-    while (number > 0) {
-        number = Math.floor(number/mainNum);
+    while (n > 0) {
         
-    zerosCount += number;
+        n = Math.floor(n/b);
         
+       zeros += n;    
+    }
+  
+    return zeros
 
+};
+
+function getSimpleComposition(base){
+    
+    let del = base/2;
+    
+    let arr = [];
+    
+    
+    for (let i = 2 ; i < base; i++){
+        
+//        console.log(i);
+        
+        if (base%i == 0) {
+            
+            arr.push(i);
+        }
     }
     
-    return zerosCount;
-
-
+    return arr.length == 0? base : Math.max.apply(null, arr);
 }
