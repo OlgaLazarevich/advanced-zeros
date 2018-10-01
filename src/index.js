@@ -1,11 +1,15 @@
 module.exports = function getZerosCount(number, base) {
+    
+    
  
     
     let n = number;
     
     let zeros = 0;
     
-    let b = getSimpleComposition(base);
+    let b = setNum(base);
+    
+//    console.log(b);
     
     while (n > 0) {
         
@@ -18,22 +22,33 @@ module.exports = function getZerosCount(number, base) {
 
 };
 
-function getSimpleComposition(base){
+
+function setNum(x) {
+	
+		let arr = [];
+		let num = 2;
+
     
-    let del = base/2;
+	function getNum (x) {
+		if (x === '1') {
+				arr.push(1);
+				}
+		if(x % num === 0){
+		 arr.push(num);
+		 x = x / num;
+		 getNum(x);	
+	
+	}else if(x % num !== 0){
+		if(!(x <= num)){
+			num++;
+		  getNum(x);
+		}
+	}
+		
+	}
     
-    let arr = [];
+    getNum (x);
     
-    
-    for (let i = 2 ; i < base; i++){
-        
-//        console.log(i);
-        
-        if (base%i == 0) {
-            
-            arr.push(i);
-        }
-    }
-    
-    return arr.length == 0? base : Math.max.apply(null, arr);
+//    console.log(Math.max.apply(null, arr));
+    return Math.max.apply(null, arr);
 }
